@@ -3,10 +3,22 @@ const path = require('path');
 /* Plugin utilizado para gerar o html final com a importação correta, melhorando o fluxo da aplicação. */
 const htmlWebpackPlugin = require('html-webpack-plugin');
 
+/* Cria uma variável para checar se o NODE_ENV está como production.*/
+const isDevelopment = process.env.NODE.ENV !== 'production';
+
 module.exports = {
-    /* Define o modo de finalização do pacote, sendo o de desenvolvimento mais
-    rápido, pois não faz algumas otimizações e fica mais legível. */
-    mode: 'development',
+    /** Define o modo de finalização do pacote, sendo o de desenvolvimento mais rápido, pois não faz algumas otimizações
+     * e fica mais legível. 
+     * Faz a checagem se é ambiente de desenvolvimento ou produção.
+    */
+    mode: isDevelopment ? 'development' : 'production',
+    /** 
+     * Auxilia na visualização de erros no Inspect do navegador, mostrando o código
+     * exato conforme foi desenvolvido para debugar.
+     * Faz a checagem se é ambiente de desenvolvimento ou produção e aplica o
+     * sourcemap correspondente.
+    */
+    devtool: isDevelopment ? 'eval-source-map' : 'source-map',
     /* Definição do arquivo de origem. */
     entry: path.resolve(__dirname, 'src', 'index.jsx'),
     /* Definição do arquivo de destino. */
@@ -22,7 +34,6 @@ module.exports = {
     },
     /* Especifica a pasta de arquivos estáticos que será monitorada pelo webpack live server. */
     devServer: {
-        // contentBase: path.resolve(__dirname, 'public')
         static: {
             directory: path.resolve(__dirname, 'public')
         }
