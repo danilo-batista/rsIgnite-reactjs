@@ -2,6 +2,9 @@
 const path = require('path');
 
 module.exports = {
+    /* Define o modo de finalização do pacote, sendo o de desenvolvimento mais
+    rápido, pois não faz algumas otimizações e fica mais legível. */
+    mode: 'development',
     /* Definição do arquivo de origem. */
     entry: path.resolve(__dirname, 'src', 'index.jsx'),
     /* Definição do arquivo de destino. */
