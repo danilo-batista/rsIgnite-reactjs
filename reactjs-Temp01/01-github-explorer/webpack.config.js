@@ -20,6 +20,13 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx']
     },
+    /* Especifica a pasta de arquivos estáticos que será monitorada pelo webpack live server. */
+    devServer: {
+        // contentBase: path.resolve(__dirname, 'public')
+        static: {
+            directory: path.resolve(__dirname, 'public')
+        }
+    },
     plugins: [
         /* Plugin instanciado, passando a localização de um template base. */
         new htmlWebpackPlugin({
