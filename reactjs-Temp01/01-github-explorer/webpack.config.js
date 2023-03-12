@@ -1,5 +1,7 @@
 /* Importação para rpadronizar a localização dos arquivos. */
 const path = require('path');
+/* Plugin utilizado para gerar o html final com a importação correta, melhorando o fluxo da aplicação. */
+const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     /* Define o modo de finalização do pacote, sendo o de desenvolvimento mais
@@ -18,6 +20,12 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx']
     },
+    plugins: [
+        /* Plugin instanciado, passando a localização de um template base. */
+        new htmlWebpackPlugin({
+            template: path.resolve(__dirname, 'public', 'index.html')
+        })
+    ],
     /* Como a aplicação vai se comportar nas importações dos arquivos. */
     module: {
         /* Conjunto de regras onde cada uma definirá a importação de um tipo de arquivo. */
