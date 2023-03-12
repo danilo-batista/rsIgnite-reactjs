@@ -55,6 +55,14 @@ module.exports = {
                 exclude: /node_modules/,
                 /* Extensão que integra o Babel com o Webpack. */
                 use: 'babel-loader'
+            },
+            {
+                /* Regex que testa a regra a ser definida. */
+                test: /\.scss$/,
+                /* OpçÃo que exclui a pasta 'node_modules' por ela estar pronta para a produção. */
+                exclude: /node_modules/,
+                /* Extensão que integra os loaders de css. */
+                use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
     }
