@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
     /* Definição do arquivo de origem. */
-    entry: path.resolve(__dirname, 'src', 'app.jsx'),
+    entry: path.resolve(__dirname, 'src', 'index.jsx'),
     /* Definição do arquivo de destino. */
     output: {
         /* Definição da pasta de destino. */
@@ -13,7 +13,7 @@ module.exports = {
     },
     /* Formatos de arquivos que serão lidos pelo webpack. */
     resolve: {
-        extensions: ['js', 'jsx']
+        extensions: ['.js', '.jsx']
     },
     /* Como a aplicação vai se comportar nas importações dos arquivos. */
     module: {
