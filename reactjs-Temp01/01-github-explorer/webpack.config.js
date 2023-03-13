@@ -2,6 +2,8 @@
 const path = require('path');
 /* Plugin utilizado para gerar o html final com a importação correta, melhorando o fluxo da aplicação. */
 const htmlWebpackPlugin = require('html-webpack-plugin');
+/* */
+const reactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 /* Cria uma variável para checar se o NODE_ENV está como production.*/
 const isDevelopment = process.env.NODE.ENV !== 'production';
@@ -36,14 +38,17 @@ module.exports = {
     devServer: {
         static: {
             directory: path.resolve(__dirname, 'public')
-        }
+        },
+        hot: true
     },
     plugins: [
+        /* Plugin instanciado, onde em ambiente de produção, habilita o webpack fast refresh. */
+        isDevelopment && new reactRefreshWebpackPlugin(),
         /* Plugin instanciado, passando a localização de um template base. */
         new htmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html')
         })
-    ],
+    ].filter(Boolean),
     /* Como a aplicação vai se comportar nas importações dos arquivos. */
     module: {
         /* Conjunto de regras onde cada uma definirá a importação de um tipo de arquivo. */
@@ -54,7 +59,14 @@ module.exports = {
                 /* OpçÃo que exclui a pasta 'node_modules' por ela estar pronta para a produção. */
                 exclude: /node_modules/,
                 /* Extensão que integra o Babel com o Webpack. */
-                use: 'babel-loader'
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        plugins: [
+                            isDevelopment && require.resolve('react-refresh/babel')
+                        ].filter(Boolean)
+                    }
+                }
             },
             {
                 /* Regex que testa a regra a ser definida. */
