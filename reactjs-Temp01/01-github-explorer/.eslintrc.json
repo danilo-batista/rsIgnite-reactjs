@@ -7,7 +7,9 @@
     "extends": [
         "plugin:react/recommended",
         "standard-with-typescript",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "plugin:prettier/recommended"
     ],
     "overrides": [],
     "parserOptions": {
@@ -16,7 +18,8 @@
     },
     "plugins": [
         "react",
-        "eslint-plugin-import-helpers"
+        "eslint-plugin-import-helpers",
+        "prettier"
     ],
     "rules": {
         "camelcase": "off",
@@ -74,7 +77,8 @@
                     "**/*.spec.js"
                 ]
             }
-        ]
+        ],
+        "prettier/prettier": "error"
     },
     "settings": {
         "import/resolver": {
